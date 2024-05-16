@@ -58,10 +58,10 @@ export const reject = api(
 );
 
 export const status = api(
-  { expose: true, method: "GET", path: "/expense/:expenseId" },
-  async (request: ExpenseRequest): Promise<{ status: ExpenseStatus }> => {
+  { expose: true, method: "GET", path: "/expense/:id" },
+  async ({ id }: { id: string }): Promise<{ status: ExpenseStatus }> => {
     const client = new WorkflowClient();
-    const status = await client.getHandle(request.expenseId).query(getStatus);
+    const status = await client.getHandle(id).query(getStatus);
     return { status };
   }
 );
