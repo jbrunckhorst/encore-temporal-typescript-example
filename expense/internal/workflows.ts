@@ -15,7 +15,7 @@ export const approveSignal = defineSignal('approve');
 export const rejectSignal = defineSignal('reject');
 export const getStatus = defineQuery<ExpenseStatus>('status');
 
-const { createExpense, payment } = proxyActivities<typeof activities>({
+const { createExpense, payment, notifyAboutRejection } = proxyActivities<typeof activities>({
   startToCloseTimeout: '5 minutes',
 });
 
@@ -35,6 +35,7 @@ export async function expense(expenseId: string, timeout: Duration = '30s'): Pro
 
   status = await timeoutOrUserAction(timeout);
   if (status !== ExpenseStatus.APPROVED) {
+    await notifyAboutRejection(expenseId);
     return { status };
   }
   await payment(expenseId);
