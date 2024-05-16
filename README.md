@@ -2,6 +2,8 @@
 
 This project aims to test Encore's TypeScript SDK together with the Temporal SDK. We built a small expense approval workflow (inspired by [this example](https://github.com/temporalio/samples-typescript/tree/main/expense)).
 
+![Workflow](assets/workflow.png)
+
 ## Running locally
 
 ### Start Temporal development server
